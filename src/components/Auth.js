@@ -10,7 +10,15 @@ const Auth = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
+    let body = { username, password };
+    axios
+    .post(register ? "/register" : "/login", body)
+    .then((res) => {
+      dispatch({ type: "LOGIN", payload: res.data });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
     console.log("submitHandler called");
   };
 
@@ -18,9 +26,26 @@ const Auth = () => {
     <main>
       <h1>Welcome!</h1>
       <form className="form auth-form" onSubmit={submitHandler}>
-        <input className="form-input" />
-        <input className="form-input" />
-        <button className="form-btn">{register ? "Sign Up" : "Login"}</button>
+        {/* username */}
+        <input 
+          className="form-input" 
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+        {/* password */}
+        <input 
+          className="form-input" 
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button 
+          className="form-btn">
+            {register ? "Sign Up" : "Login"}
+        </button>
       </form>
       <button className="form-btn" onClick={() => setRegister(!register)}>
         Need to {register ? "Login" : "Sign Up"}?

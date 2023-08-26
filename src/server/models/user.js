@@ -3,14 +3,20 @@ const {DataTypes} = require('sequelize')
 const {sequelize} = require('../util/database')
 
 module.exports = {
-    User : sequelize.define('user', {
+    User : sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING, 
-        hashedPass: DataTypes.STRING
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        hashedPass: { // Define the hashedPass property
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     })
 }

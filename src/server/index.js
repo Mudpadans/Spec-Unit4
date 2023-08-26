@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const { PORT } = process.env || 4004
+const PORT = process.env.PORT
 const {sequelize} = require('./util/database')
 const {User} = require('./models/user')
 const {Post} = require('./models/post')
@@ -32,5 +32,3 @@ sequelize.sync()
     app.listen(PORT, () => console.log(`db sync successful & server running on port ${PORT}`))
 })
 .catch(err => console.log(err))
-
-// app.listen(PORT, () => console.log(`Running on Port ${PORT}`))

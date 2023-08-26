@@ -1,8 +1,9 @@
-require('dotenv').config()
-const SECRET = process.env.SECRET
-const jwt = require('jsonwebtoken')
-const {User} = '../models/user'
-const bcrypt = require('bcryptjs')
+require('dotenv').config();
+const SECRET = process.env.SECRET;
+const jwt = require('jsonwebtoken');
+const {User} = require('../models/user');
+const bcrypt = require('bcryptjs');
+const axios = require('axios');
 
 const createToken = (username, id) => {
     return jwt.sign(
@@ -52,10 +53,11 @@ module.exports = {
         }
     },
     register: async (req, res) => {
+        console.log(req.body)
         try {
             let {username, password} = req.body
             let foundUser = await User.findOne({where: 
-                {username:username}
+                {username}
             })
             if (foundUser) {
                 res.status(400).send('Username is Taken!')
@@ -64,7 +66,7 @@ module.exports = {
                 const hash = bcrypt.hashSync(password, salt)
 
                 let newUser = await User.create({
-                    username: username, 
+                    username, 
                     hashedPass: hash
                 })
 
@@ -80,7 +82,7 @@ module.exports = {
                     token: token,
                     exp: exp
                     } 
-                    res.status(200).send(data)
+                res.status(200).send(data)
             }
         } catch (error) {
             console.log(error)
