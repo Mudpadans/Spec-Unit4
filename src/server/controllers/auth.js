@@ -40,7 +40,7 @@ module.exports = {
                         token: token,
                         exp: exp,
                     };
-                    res.status(200).send(data);
+                    return res.status(200).send(data);
                     
                 }
             }

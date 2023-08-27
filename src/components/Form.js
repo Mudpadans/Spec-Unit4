@@ -1,16 +1,3 @@
-// const Form = () => {
-//     return (
-//         <main>
-//             <h1>Form</h1>
-//         </main>
-//     )
-// }
-
-// export default Form
-
-
-
-
 
 import {useState, useContext} from 'react'
 import axios from 'axios'

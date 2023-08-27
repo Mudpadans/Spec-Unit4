@@ -16,7 +16,7 @@ module.exports = {
         } catch (error) {
             console.log('ERROR IN addPosts')
             console.log(error)
-            res.sendStatus(400)
+            res.sendStatus(400).send(error)
         }
     },
     getAllPosts: async (req, res) => {

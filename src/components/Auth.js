@@ -17,6 +17,9 @@ const Auth = () => {
       dispatch({ type: "LOGIN", payload: res.data });
     })
     .catch((err) => {
+      if(err.reponse.data) {
+        alert(err.response.data)
+      }
       console.error(err);
     });
     console.log("submitHandler called");
@@ -32,7 +35,7 @@ const Auth = () => {
           type="text"
           placeholder="username"
           value={username}
-          onChange={e => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         />
         {/* password */}
         <input 
@@ -40,7 +43,7 @@ const Auth = () => {
           type="password"
           placeholder="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button 
           className="form-btn">

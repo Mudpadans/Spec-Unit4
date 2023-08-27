@@ -1,17 +1,3 @@
-// const Profile = () => {
-//     return (
-//         <main>
-//             <h1>You must be logged in to view your profile.</h1>
-//         </main>
-//     )
-// }
-
-// export default Profile
-
-
-
-
-
 
 import {useContext, useEffect, useState, useCallback} from 'react'
 import axios from 'axios'
@@ -19,15 +5,15 @@ import axios from 'axios'
 import AuthContext from '../store/authContext'
 
 const Profile = () => {
-    const {state} = useContext(AuthContext)
+    const {state: {userId, token}} = useContext(AuthContext)
 
     const [posts, setPosts] = useState([])
 
     const getUserPosts = useCallback(() => {
-        axios.get(`/userposts/${state.userId}`)
+        axios.get(`/userposts/${userId}`)
             .then(res => setPosts(res.data))
             .catch(err => console.log(err))
-    }, [state.userId])
+    }, [userId])
 
     useEffect(() => {
         getUserPosts()
@@ -36,7 +22,7 @@ const Profile = () => {
     const updatePost = (id, status) => {
         axios.put(`/posts/${id}`, {status: !status}, {
             headers: {
-                authorization: state.token
+                authorization: token
             }
         })
             .then(() => {
@@ -50,7 +36,7 @@ const Profile = () => {
     const deletePost = id => {
         axios.delete(`/posts/${id}`, {
             headers: {
-                authorization: state.token
+                authorization: token
             }
         })
             .then(() => {
@@ -68,7 +54,7 @@ const Profile = () => {
                 <h4>{post.user.username}</h4>
                 <p>{post.content}</p>
                 {
-                    state.userId === post.userId &&
+                    userId === post.userId &&
                     <div>
                         <button className='form-btn' onClick={() => updatePost(post.id, post.privateStatus)}>
                             {post.privateStatus ? 'make public' : 'make private'}
