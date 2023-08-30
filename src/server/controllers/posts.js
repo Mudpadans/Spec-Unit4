@@ -1,5 +1,5 @@
-const Post = require('../models/post')
-const User = require('../models/user')
+const { Post } = require('../models/post')
+const { User } = require('../models/user')
 
 
 
@@ -12,10 +12,9 @@ module.exports = {
                 content, 
                 privateStatus: status, 
                 userId})
-            res.sendStatus(200)
+            res.status(200).send("OK")
         } catch (error) {
-            console.log('ERROR IN addPosts')
-            console.log(error)
+            console.log(error, 'ERROR IN addPosts')
             res.sendStatus(400).send(error)
         }
     },
@@ -29,11 +28,10 @@ module.exports = {
                     attributes: [`username`]
                 }]
             })
-            res.sendStatus(200).send(posts)
+            res.status(200).send(posts)
         } catch (error) {
-            console.log('ERROR IN getAllPosts')
-            console.log(error)
-            res.sendStatus(400)
+            console.log(error, 'ERROR IN getAllPosts')
+            res.sendStatus(400).send(error)
         }
             
     },
@@ -47,11 +45,10 @@ module.exports = {
                     required: true,
                     attributes: [`username`]
                 }]})
-            res.sendStatus(200).send(posts)
+            res.status(200).send(posts)
         } catch (error) {
-            console.log('ERROR IN getCurrentUserPosts')
-            console.log(error)
-            res.sendStatus(400)
+            console.log(error, 'ERROR IN getCurrentUserPosts')
+            res.sendStatus(400).send(error)
         }
         
     },
@@ -64,9 +61,8 @@ module.exports = {
             })
             res.sendStatus(200)
         } catch (error) {
-            console.log('ERROR IN editPost')
-            console.log(error)
-            res.sendStatus(400)
+            console.log(error, 'ERROR IN editPost')
+            res.sendStatus(400).send(error)
         }
         
     }, 
@@ -76,9 +72,8 @@ module.exports = {
             await Post.destroy({where: {id: +id}})
             res.sendStatus(200)
         } catch (error) {
-            console.log('ERROR in deletePost')
-            console.log(error)
-            res.sendStatus(400)
+            console.log(error, 'ERROR in deletePost')
+            res.sendStatus(400).send(error)
         }
     }
 }

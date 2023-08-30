@@ -30,7 +30,7 @@ app.delete('/posts/:id', isAuthenticated, deletePost)
 User.hasMany(Post)
 Post.belongsTo(User)
 
-sequelize.sync()
+sequelize.sync({ force: true })
 .then(() => {
     server.listen(PORT, () => console.log(`db sync successful & server running on port ${PORT}`))
 })
