@@ -83,6 +83,7 @@ module.exports = {
                     exp: exp
                     } 
                 res.status(200).send(data)
+                console.log(data);
             }
         } catch (error) {
             console.log(error)
