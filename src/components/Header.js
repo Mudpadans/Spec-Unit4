@@ -27,10 +27,10 @@ const Header = () => {
                                 <NavLink style={styleActiveLink} to='/'>Home</NavLink>
                             </li>
                             <li>
-                                <NavLink style={styleActiveLink} to='profile'>Profile</NavLink>
+                                <NavLink style={styleActiveLink} to='/profile'>Profile</NavLink>
                             </li>
                             <li>
-                                <NavLink style={styleActiveLink} to='form'>Add Post</NavLink>
+                                <NavLink style={styleActiveLink} to='/form'>Add Post</NavLink>
                             </li>
                             <li>
                                 <button className='logout-btn' onClick={() => dispatch({type: 'LOGOUT'})}>Logout</button>
@@ -42,7 +42,7 @@ const Header = () => {
                                 <NavLink style={styleActiveLink} to='/'>Home</NavLink>
                             </li>
                             <li>
-                                <NavLink style={styleActiveLink} to='.auth'>Login or Sign Up</NavLink>
+                                <NavLink style={styleActiveLink} to='/auth'>Login or Sign Up</NavLink>
                             </li>
                         </ul>
                     )

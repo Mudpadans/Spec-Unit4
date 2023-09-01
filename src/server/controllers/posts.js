@@ -5,6 +5,7 @@ const { User } = require('../models/user')
 
 module.exports = {
     addPost: async (req, res) => {
+        console.log(req.body)
         try {
             const {title, content, status, userId} = req.body
             await Post.create({
@@ -12,13 +13,14 @@ module.exports = {
                 content, 
                 privateStatus: status, 
                 userId})
-            res.status(200).send("OK")
+            res.sendStatus(200)
         } catch (error) {
             console.log(error, 'ERROR IN addPosts')
             res.sendStatus(400).send(error)
         }
     },
     getAllPosts: async (req, res) => {
+        console.log("test");
         try {
             const posts = await Post.findAll({
                 where: {privateStatus: false},
@@ -37,9 +39,9 @@ module.exports = {
     },
     getCurrentUserPosts: async (req, res) => {
         try {
-            const {userId} = req.params
+            const {id} = req.params
             const posts = await Post.findAll({
-                where: {userId: userId},
+                where: {userId: id},
                 include: [{
                     model: User,
                     required: true,

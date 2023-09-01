@@ -15,6 +15,7 @@ const Form = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+        console.log(state)
 
         axios.post('/posts', {title, content, status, userId: state.userId}, {
             headers: {

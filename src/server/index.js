@@ -22,7 +22,7 @@ app.post('/login', login)
 
 app.get('/posts', getAllPosts)
 
-app.get('/posts/:id', getCurrentUserPosts)
+app.get('/userposts/:id', getCurrentUserPosts)
 app.post('/posts', isAuthenticated, addPost)
 app.put('/posts/:id', isAuthenticated, editPost)
 app.delete('/posts/:id', isAuthenticated, deletePost)
@@ -30,7 +30,7 @@ app.delete('/posts/:id', isAuthenticated, deletePost)
 User.hasMany(Post)
 Post.belongsTo(User)
 
-sequelize.sync({ force: true })
+sequelize.sync()
 .then(() => {
     server.listen(PORT, () => console.log(`db sync successful & server running on port ${PORT}`))
 })

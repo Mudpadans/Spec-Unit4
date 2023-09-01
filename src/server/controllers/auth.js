@@ -20,14 +20,17 @@ const createToken = (username, id) => {
 
 module.exports = {
     login: async (req, res) => {
+        console.log(req.body)
         try {
             let {username, password} = req.body;
             let foundUser = await User.findOne({ where: { username: username } });
+            console.log(foundUser)
             if (foundUser) {
                 const isAuthenticated = bcrypt.compareSync(
                     password,
                     foundUser.hashedPass
                 );
+                console.log(isAuthenticated)
                 if (isAuthenticated) {
                     let token = createToken(
                         foundUser.dataValues.username,
@@ -40,8 +43,10 @@ module.exports = {
                         token: token,
                         exp: exp,
                     };
+                    console.log("data", data)
                     return res.status(200).send(data);
-                    
+                } else {
+                    res.status(403).send('incorrect password')
                 }
             }
             const token = createToken(username, password)

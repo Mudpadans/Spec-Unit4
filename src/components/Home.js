@@ -5,7 +5,7 @@ import axios from 'axios'
 import AuthContext from '../store/authContext'
 
 const Home = () => {
-    const {state: {userId}} = useContext(AuthContext)
+    const {state: userId} = useContext(AuthContext)
 
     const [posts, setPosts] = useState([])
 

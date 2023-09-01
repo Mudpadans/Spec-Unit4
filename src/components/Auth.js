@@ -14,11 +14,12 @@ const Auth = () => {
     axios
     .post(register ? "/register" : "/login", body)
     .then((res) => {
+      console.log(res.data)
       dispatch({ type: "LOGIN", payload: res.data });
     })
     .catch((err) => {
-      if(err.reponse.data) {
-        alert(err.response.data)
+      if(err.data) {
+        alert("Wrong Password")
       }
       console.error(err);
     });
